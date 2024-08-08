@@ -1,0 +1,38 @@
+﻿@using AdminSectionLuRaKasa.Data
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Components.Authorization;
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserManager<ApplicationUser> UserManager
+
+@page "/"
+<AuthorizeView>
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+@foreach(var user in users)
+{
+    <p>@user.UserName - @user.Id</p>
+}
+</AuthorizeView>
+@code {
+    private List<IdentityUser> users = new List<IdentityUser>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = new List<IdentityUser>();
+        // get users from _UserManager
+        var user = UserManager.Users.Select(x => new IdentityUser
+            {
+                Id = x.Id,
+                UserName = x.UserName,
+                Email = x.Email,
+                PasswordHash = "*****",
+                LockoutEnd = x.LockoutEnd
+            });
+        foreach (var item in user)
+        {
+            users.Add(item);
+        }
+    }
+}

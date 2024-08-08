@@ -1,0 +1,6 @@
+@WebAPILuRaKasa_HostAddress = http://localhost:5195
+
+GET {{WebAPILuRaKasa_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
