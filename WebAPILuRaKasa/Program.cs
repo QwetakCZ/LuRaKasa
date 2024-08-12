@@ -1,12 +1,27 @@
 
+using Microsoft.EntityFrameworkCore;
+using WebAPILuRaKasa.Controllers;
+using WebAPILuRaKasa.Data;
+
 namespace WebAPILuRaKasa
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
 
+            var builder = WebApplication.CreateBuilder(args);
+            //Pridani konfigurace pro pripojeni k DB
+
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+                                    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+            builder.Services.AddDbContext<ApplicationDBContext>(options =>
+                                                        options.UseSqlServer(connectionString));
+
+
+            builder.Services.AddTransient<ApplicationDBContext>();
+            builder.Services.AddTransient<UserController>();
             // Add services to the container.
 
             builder.Services.AddControllers();

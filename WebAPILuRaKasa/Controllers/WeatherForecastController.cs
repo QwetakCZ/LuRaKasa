@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using DTOLuRaKasa;
 
 namespace WebAPILuRaKasa.Controllers
 {
@@ -17,6 +18,9 @@ namespace WebAPILuRaKasa.Controllers
         {
             _logger = logger;
         }
+
+        
+
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
