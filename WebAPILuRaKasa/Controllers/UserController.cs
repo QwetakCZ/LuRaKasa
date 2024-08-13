@@ -16,9 +16,14 @@ namespace WebAPILuRaKasa.Controllers
         {
             _context = context;
         }
+        [HttpGet("Ahoj")]
+        public string GetAhoj()
+        {
+            return "Ahoj z WebAPI";
+        }
+       
 
-
-        [HttpGet(Name = "GetAllUsers")]
+        [HttpGet("AllUsers")]
         public List<UserDTO> GetAllUsers()
         {
             var users = new List<UserDTO>();

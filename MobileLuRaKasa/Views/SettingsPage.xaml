@@ -3,9 +3,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileLuRaKasa.Views.SettingsPage"
              xmlns:ui="clr-namespace:MobileLuRaKasa.UI"
+             xmlns:model="clr-namespace:MobileLuRaKasa.ViewModels"
+             x:DataType="model:GlobalViewModel"
              Shell.NavBarIsVisible="False">
 
     <VerticalStackLayout>
         <ui:CustomMenu IsSettingsButtonVisible="false" IsBackButtonVisible="True"></ui:CustomMenu>
+        <Label
+            Text="Přihlášeni:"
+            FontSize="Small"
+            Margin="10,30"
+            TextColor="OrangeRed">
+        </Label>
+
+        
+        <Entry 
+            Placeholder="Přihlašovací jméno"
+            WidthRequest="200"
+            Text="{Binding Username}"
+            HorizontalOptions="Start"
+            Margin="10,-20"
+           
+            />
+        <Entry
+            Placeholder="Heslo"
+            WidthRequest="200"
+            Text="{Binding Password}"
+            HorizontalOptions="Start"
+            Margin="10,20"
+            IsPassword="True"
+            />
+
+        <Button
+            Text="Přihlásit"
+            Margin="20"
+            x:Name="btnLogin"
+            Clicked="btnLogin_Clicked"
+            />
+
+        <Label
+            Text="{Binding Result}"
+            x:Name="label"
+            TextColor="red"
+            />
     </VerticalStackLayout>
 </ContentPage>
