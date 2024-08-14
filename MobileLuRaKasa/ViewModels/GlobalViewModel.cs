@@ -12,6 +12,7 @@ namespace MobileLuRaKasa.ViewModels
         public string Password { get; set; }
         public string Result { get; set; }
 
+        public string Api { get; set; } = "http://";
         
     }
 }

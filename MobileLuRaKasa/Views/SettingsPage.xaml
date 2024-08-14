@@ -9,6 +9,34 @@
 
     <VerticalStackLayout>
         <ui:CustomMenu IsSettingsButtonVisible="false" IsBackButtonVisible="True"></ui:CustomMenu>
+        <HorizontalStackLayout>
+        <Label
+            Text="API : "
+            FontSize="Small"
+            Margin="10,30"
+            FontAttributes="Bold"
+            >
+        </Label>
+            <Entry
+                Placeholder="API"
+                WidthRequest="200"
+                x:Name="entryApi"
+                Text="{Binding Api}"
+                HorizontalOptions="Start"
+                HeightRequest="50"
+                Margin="10"
+                />
+            <Button
+                Text="Nastavit"
+                Margin="20"
+               
+                x:Name="btnSave"
+                Clicked="btnSave_Clicked"
+                BackgroundColor="LightGray"
+                TextColor="Black"
+                />
+        </HorizontalStackLayout>
+        <BoxView HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" Margin="10,0"/>
         <Label
             Text="Přihlášeni:"
             FontSize="Small"
@@ -20,6 +48,7 @@
         <Entry 
             Placeholder="Přihlašovací jméno"
             WidthRequest="200"
+            x:Name="entryLogin"
             Text="{Binding Username}"
             HorizontalOptions="Start"
             Margin="10,-20"
@@ -28,6 +57,7 @@
         <Entry
             Placeholder="Heslo"
             WidthRequest="200"
+            x:Name="entryPassword"
             Text="{Binding Password}"
             HorizontalOptions="Start"
             Margin="10,20"
@@ -40,11 +70,26 @@
             x:Name="btnLogin"
             Clicked="btnLogin_Clicked"
             />
+        <BoxView HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" Margin="10,0"/>
 
+        <HorizontalStackLayout>
         <Label
-            Text="{Binding Result}"
-            x:Name="label"
-            TextColor="red"
+            Text="UserID:"
+            FontSize="Small"
+            Margin="10,30"
+            TextColor="OrangeRed">
+        </Label>
+
+        <Entry
+            Text="Nepřihlášený uživatel"
+            x:Name="entryUserId"
+            IsVisible="True"
+            WidthRequest="200"
+            HorizontalOptions="Start"
+            Margin="10,20"
+            TextColor="LightGray"
+            IsReadOnly="true"
             />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

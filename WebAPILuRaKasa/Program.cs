@@ -1,7 +1,9 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using WebAPILuRaKasa.Controllers;
 using WebAPILuRaKasa.Data;
+
 
 namespace WebAPILuRaKasa
 {
@@ -22,7 +24,10 @@ namespace WebAPILuRaKasa
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDBContext>()
+                    .AddDefaultTokenProviders();
+            builder.Services.AddScoped<UserController>();
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())

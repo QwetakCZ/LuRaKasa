@@ -8,7 +8,7 @@ namespace WebAPILuRaKasa.Data
 
         }
 
-        public DbSet<AdminSectionLuRaKasa.Data.ApplicationUser> AspNetUsers { get; set; }
+        public DbSet<ApplicationUser> AspNetUsers { get; set; }
 
     }
 }
