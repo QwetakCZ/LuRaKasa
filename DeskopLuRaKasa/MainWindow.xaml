@@ -3,10 +3,80 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DeskopLuRaKasa.ViewModels"
+        xmlns:viewmodel="clr-namespace:DeskopLuRaKasa.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodel:GlobalViewModel}"
         xmlns:local="clr-namespace:DeskopLuRaKasa"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="LuRa - Kasa" MinHeight="768" MinWidth="1024" x:Name="MainLayout" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!--Menu-->
+        <Menu Grid.Row="0" x:Name="_menu" Grid.ColumnSpan="2">
+            <MenuItem Header="Nastavení">
+                <MenuItem Header="Správa produktů" x:Name="Products" Click="Products_Click"/>
+                <MenuItem Header="Správa kategorií" x:Name="Categories" Click="Categories_Click"/>
+                <Separator/>
+                <MenuItem Header="Příhlášení" x:Name="MenuLogin" Click="MenuLogin_Click" />
 
+                <MenuItem Header="O aplikaci"/>
+            </MenuItem>
+        </Menu>
+        <!--Hlavní obrazovka-->
+
+        <!--Klikaci menu -->
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Background="LightGoldenrodYellow">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button x:Name="btn_OrderPage" Grid.Row="0" Click="btn_OrderPage_Click" Width="80" Height="80" Background="Gold" Padding="10">
+                <Button.Content>
+                    <Image Source="/Images/order.png" />
+
+                </Button.Content>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="12" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btn_PayPage" Grid.Row="1" Click="btn_PayPage_Click" Width="80" Height="80"  Background="Gold" Padding="10" >
+                <Button.Content>
+                    <Image Source="/Images/Pay.png"></Image>
+                </Button.Content>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="12" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+        <!--Frame -->
+        <Frame Grid.Row="2" Name="MainFrame" NavigationUIVisibility="Hidden"></Frame>
+
+
+        <!--Paticka-->
+        <Grid Grid.Row="3" Background="LightGray" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"  Content="ID Uživatele :" FontWeight="Bold"/>
+            <Label Grid.Column="1"  x:Name="label" Content="{Binding UserId}"></Label>
+        </Grid>
     </Grid>
 </Window>
