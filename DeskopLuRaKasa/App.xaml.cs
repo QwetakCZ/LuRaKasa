@@ -14,6 +14,7 @@ namespace DeskopLuRaKasa
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NCaF1cXGNCd0x3THxbf1x0ZFRHalhXTnNfUiweQnxTdEFjUX1ecXZVRmNYUEN2Xg==");
 
             using (var context = new LocalDBContext())
             {
@@ -21,6 +22,8 @@ namespace DeskopLuRaKasa
             }
            
         }
+
+
     }
 
 }

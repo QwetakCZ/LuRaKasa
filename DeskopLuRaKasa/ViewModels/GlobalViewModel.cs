@@ -22,6 +22,23 @@ namespace DeskopLuRaKasa.ViewModels
             }
         }
 
+        private bool _isLoading = false;
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private const string loginFailed = "Přihlášení se nezdařilo";
+
+        public string LoginFailed => loginFailed;
+
+
        
     }
 }

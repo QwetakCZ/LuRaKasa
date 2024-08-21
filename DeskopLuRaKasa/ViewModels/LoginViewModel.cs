@@ -9,7 +9,7 @@ namespace DeskopLuRaKasa.ViewModels
 {
     public class LoginViewModel : NotifyProperty
     {
-        private GlobalViewModel _globalModel;
+        public GlobalViewModel _globalModel;
 
         public LoginViewModel(GlobalViewModel g)
         {

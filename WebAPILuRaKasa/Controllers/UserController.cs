@@ -23,25 +23,21 @@ namespace WebAPILuRaKasa.Controllers
             _context = context;
             _signInManager = signInManager;
         }
-        [HttpGet("Ahoj")]
-        public string GetAhoj()
-        {
-            return "Ahoj z WebAPI";
-        }
+        
 
         [HttpGet("Login")]
         public async Task<string> Login(string username, string password)
         {
             
             var user = await _userManager.FindByNameAsync(username);
-            if (user == null) { return "Uzivatel nenalezen"; }
+            if (user == null) { return string.Empty; }
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
 
             if (result.Succeeded)
                 return user.Id;
             else
-                return "Spatne zadane heslo";
+                return string.Empty;
 
 
             

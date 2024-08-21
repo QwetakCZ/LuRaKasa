@@ -2,6 +2,7 @@
 using DeskopLuRaKasa.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -24,24 +25,51 @@ namespace DeskopLuRaKasa.Pages
     public partial class LoginPage : Page
     {
         LoginViewModel _loginViewModel;
+        SendRequestAPI sendRequestAPI;
         public LoginPage(GlobalViewModel g)
         {
             _loginViewModel = new LoginViewModel(g);
+            sendRequestAPI = new SendRequestAPI(g);
             this.DataContext = _loginViewModel;
             InitializeComponent();
         }
 
         private async void btn_Login_Click(object sender, RoutedEventArgs e)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5195/");
-            var text = await client.GetStringAsync($"User/Login?username=admin@admin.cz&password=neznam");
-            IsolatedStorageServices.Set("UserId", text);
+            labelLogin.Content = String.Empty;
+            _loginViewModel._globalModel.IsLoading = !_loginViewModel._globalModel.IsLoading;
+            var userIdText = await sendRequestAPI.LoginToStringAsync(_loginViewModel.Login, _loginViewModel.Password);
+            if (userIdText != _loginViewModel._globalModel.LoginFailed)
+            {
+                SetUserId(userIdText);
+
+            }
+            else
+            {
+                SetUserId();
+            }
+
+            _loginViewModel._globalModel.IsLoading = !_loginViewModel._globalModel.IsLoading;
+
         }
 
         private void btn_LogOut_Click(object sender, RoutedEventArgs e)
         {
+            _loginViewModel._globalModel.UserId = String.Empty;
+            IsolatedStorageServices.Set("UserId", String.Empty);
+        }
 
+        private void SetUserId(string? userId = "")
+        { 
+         
+         
+                IsolatedStorageServices.Set("UserId", userId);
+                _loginViewModel._globalModel.UserId = userId;
+                _loginViewModel.Login = String.Empty;
+                _loginViewModel.Password = String.Empty;
+                labelLogin.Content = userId != "" ? "Přihlášení proběhlo úspěšně" : _loginViewModel._globalModel.LoginFailed;
+                
+         
         }
     }
 }
